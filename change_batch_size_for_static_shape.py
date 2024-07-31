@@ -9,7 +9,7 @@ def rebatch(model, batch_size):
     # Change batch size in input, output and value_info
     all_tensors = list(graph.input) + list(graph.value_info) + list(graph.output)
     for tensor in all_tensors:
-        tensor.type.tensor_type.shape.dim[0].dim_param = str(batch_size)
+        tensor.type.tensor_type.shape.dim[0].dim_value = batch_size
 
     # Set dynamic batch size in reshapes (-1)
     for node in  graph.node:
