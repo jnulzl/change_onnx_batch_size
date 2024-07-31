@@ -22,11 +22,11 @@ def rebatch(model, batch_size):
             # Shape is stored as a list of ints
             if len(init.int64_data) > 0:
                 # This overwrites bias nodes' reshape shape but should be fine
-                init.int64_data[0] = -1
+                init.int64_data[0] = batch_size
             # Shape is stored as bytes
             elif len(init.raw_data) > 0:
                 shape = bytearray(init.raw_data)
-                struct.pack_into('q', shape, 0, -1)
+                struct.pack_into('q', shape, 0, batch_size)
                 init.raw_data = bytes(shape)
 
     # onnx.save(model, outfile)
